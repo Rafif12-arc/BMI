@@ -1,0 +1,57 @@
+import tkinter as tk # Mengimpor modul tkinter yang digunakan untuk membuat antarmuka grapichal user interface (GUI) dalam Python
+from tkinter import messagebox # Mengimpor submodul messagebox dari tkinter untuk menampilkan kotak pesan
+
+# Menghitung BMI
+def hitung_bmi(): # Mendefinisikan perintah yang dibuat
+    try: # Menjalankan instruksi dan jika ada kesalahan (misal input tidak valid) maka akan menangkapnya dengan blok except
+        berat = float(entry_berat.get()) # float = menyimpan bilangan desimal maupun bilangan pecahan
+        tinggi = float(entry_tinggi.get()) / 100  # Mengubah tinggi dari cm ke meter dan membaginya dengan 100
+        bmi = berat / (tinggi ** 2) # Rumus BMI
+                                                      
+        #label_hasil.config(text=f"BMI Anda adalah: {bmi:.2f}") # Memperbarui teks pada widget label dan hasil yg telah dihitung
+        
+        # Memberikan kategori BMI
+        if bmi < 18.5: # Memeriksa apakah nilai BMI kurang dari
+            kategori = "Kurang " # Katagori
+        elif 18.5 <= bmi < 24.9: # Memeriksa apakah nilai antara 18.5 dan 24.9
+            kategori = "Normal"  # Katagori
+        elif 25 <= bmi < 29.9:   # Memerikasa apakah nilai antara 25 dan 29.9
+            kategori = "Obesitas 1" # Katagori
+        else: # Jika nilai BMI lebih dari atau sama dengan 30
+            kategori = "Obesitas 2                                                                  "
+        
+        label_kategori.config(text=f"Katagori: {kategori}")  # menampilkan kategori BMI yang sesuai
+    except ValueError: # Jika terjadi error
+        messagebox.showerror("Input Error", "Masukan Yang Benar!!.") # Kotak pesan
+
+# Membuat jendela utama
+root = tk.Tk() # Membuat jendela aplikasi tkinter
+root.title("Hitung BMI") # Judul
+
+# Menambahkan label, entry dan tombol
+label_berat = tk.Label(root, text="Masukan Berat Badan (kg):") # Membuat label teks
+label_berat.pack() # Menambahkan label ke jendela 
+
+entry_berat = tk.Entry(root) # Membuat kotak input untuk memasukan berat badan
+entry_berat.pack() #  Menambahkan entry ke jendela dan mengaturnya dalam layout
+
+label_tinggi = tk.Label(root, text="Masukan Tinggi Badan (cm):") # Membuat label teks
+label_tinggi.pack() # Menambahkan label ke jendela
+
+entry_tinggi = tk.Entry(root) # Membuat kotak input untuk memasukan tinggi badan
+entry_tinggi.pack() # Menambahkan entry ke jendela dan mengaturnya dalam layout
+
+# Tombol untuk menghitung BMI
+button_hitung = tk.Button(root, text="Hitung BMI", command=hitung_bmi) # Membuat tombol dengan teks hitung bmi dan jika ditekan fungsi hitung_bmi akan dipanggil
+button_hitung.pack() # Menambahkan tombol ke jendela
+
+# Label untuk menampilkan hasil BMI
+label_hasil = tk.Label(root, text="BMI anda: ") # Membuat label kosong yang akan menampilkan hasil BMI
+label_hasil.pack() # Menambahkan ke jendela
+ 
+# Label untuk menampilkan kategori BMI
+label_kategori = tk.Label(root, text="Katagori: ") # Membuat label kosong yang akan menampilkan kategori BMI
+label_kategori.pack() # Menambahkan ke jendela
+
+# Menjalankan aplikasi Tkinter
+root.mainloop() # Memulai dan menjalankan aplikasi tkinter  
